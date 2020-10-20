@@ -5,7 +5,9 @@ import { Link, Route } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import './styles/App.css';
 import Clients from './components/Clients';
+// import { observer } from 'mobx-react'
 
+// @observer
 function App() {
   return (
     <div className="App">

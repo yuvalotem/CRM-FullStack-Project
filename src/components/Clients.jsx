@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Dropdown, DropdownButton, ListGroup, Pagination } from 'react-bootstrap';
 import '../styles/Clients.css';
 import data from '../data.json'
+// import { inject, observer } from 'mobx-react'
 
 export default function Clients() {
     const [numResults, setNumResults] = useState(50)
