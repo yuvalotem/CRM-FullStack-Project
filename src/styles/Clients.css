@@ -1,0 +1,10 @@
+.Clients{
+    width: 90vw;
+}
+#dropdown-basic-button{
+    margin-right: 85vw;
+}
+.costumer{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
