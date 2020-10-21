@@ -1,0 +1,15 @@
+#updateForm{
+    width: 40vw;
+    padding: 5px;
+    border-radius: 10px;
+    border: #b2bec3 solid 1px;
+    background-color: #ffffffe8;
+    position: fixed;
+    left: 30%;
+    top: 30%;
+    }
+    #removeForm{
+        float: right;
+        cursor: pointer;
+        color: red;
+    }

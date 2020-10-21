@@ -1,5 +1,6 @@
 .Clients{
     width: 90vw;
+    margin-left: 4.5vw;
 }
 #dropdown-basic-button{
     margin-right: 85vw;
@@ -7,4 +8,12 @@
 .costumer{
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    cursor: pointer;
+    position: initial;
+}
+.fa-check{
+    color: green
+}
+.fa-times{
+    color: red
 }

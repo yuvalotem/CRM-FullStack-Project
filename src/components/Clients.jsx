@@ -1,66 +1,69 @@
-import React, { useState } from 'react';
-import { Dropdown, DropdownButton, ListGroup, Pagination } from 'react-bootstrap';
+import React, { Fragment, useEffect } from 'react';
+import { ListGroup } from 'react-bootstrap';
 import '../styles/Clients.css';
-import data from '../data.json'
-// import { inject, observer } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
+import FormUpdate from './FormUpdate';
+import DropDown from './DropDown';
+import Pagination from './Pagination';
 
-export default function Clients() {
-    const [numResults, setNumResults] = useState(50)
-    const [startResults, setStartResults] = useState(0)
-    const [endResults, setEndResults] = useState(numResults)
-    const [active, setActive] = useState(1)
-    const items = []
+const Clients = inject('cutomers', 'clientStore')(observer((props) => {
+    const { cutomers, clientStore } = props
+    const {
+        startResults,
+        endResults,
+        showForm,
+        changeShowForm,
+        changeIdToUpdate,
+        changeKey,
+        changeValue } = clientStore
 
-    for (let number = 1; number <= data.length / numResults; number++) {
-        items.push(
-            <Pagination.Item onClick={() => {
-                setStartResults(number * numResults - numResults)
-                setEndResults(number * numResults)
-                setActive(number)
-            }} key={number} active={number === active}>
-                {number}
-            </Pagination.Item>,
-        );
-    }
+    useEffect(() => {
+        const fetchCustomersFromDB = async () => {
+            await cutomers.loadCustomerFromDB()
+        }
+        fetchCustomersFromDB()
+    }, [])
 
-    const handleClick = (e) => {
-        setNumResults(parseInt(e.target.textContent))
-        setStartResults(0)
-        setEndResults(parseInt(e.target.textContent))
+
+    const addUpdateForm = (id) => {
+        changeKey(0)
+        changeValue(0)
+        changeIdToUpdate(id);
+        changeShowForm()
     }
 
     return (
         <div className="Clients">
-            <DropdownButton id="dropdown-basic-button" title={`${numResults} Results`}>
-                <Dropdown.Item onClick={handleClick}>50 Results</Dropdown.Item>
-                <Dropdown.Item onClick={handleClick}>100 Results</Dropdown.Item>
-                <Dropdown.Item onClick={handleClick}>200 Results</Dropdown.Item>
-            </DropdownButton>
+            <DropDown />
 
             <ListGroup>
                 <ListGroup.Item className='costumer' variant="dark">
                     <span>Name</span>
-                    <span>Email</span>
+                    <span>Surname</span>
                     <span>Country</span>
                     <span>First Contact</span>
                     <span>Sold</span>
                     <span>Email Type</span>
                     <span>Owner</span>
                 </ListGroup.Item>
-                {data.map((c, i) => startResults <= i && i <= endResults ?
-                    <ListGroup.Item key={i} className='costumer'>
-                        <span>{c.name} </span>
-                        <span>{c.email}</span>
-                        <span>{c.country}</span>
-                        <span>{c.firstContact}</span>
-                        <span>{c.sold? 'v': '-'}</span>
-                        <span>{c.emailType}</span>
-                        <span>{c.owner}</span>
-                    </ListGroup.Item> :
+                {cutomers.customers.map((c, i) => startResults <= i && i <= endResults ?
+                    <Fragment key={c._id}>
+                        <ListGroup.Item className='costumer' onClick={() => addUpdateForm(c._id)}>
+                            <span>{c.name.split(' ')[0]} </span>
+                            <span>{c.name.split(' ')[1]}</span>
+                            <span>{c.country}</span>
+                            <span>{c.firstContact}</span>
+                            <span>{c.sold ? <i className="fas fa-check"></i> : <i className="fas fa-times"></i>}</span>
+                            <span>{c.emailType === 'null' ? '' : c.emailType}</span>
+                            <span>{c.owner}</span>
+                        </ListGroup.Item>
+                    </Fragment> :
                     null)}
             </ListGroup>
+                    {showForm ? <FormUpdate /> : null}
 
-            <Pagination size="sm">{items}</Pagination>
+            <Pagination />
         </div>
     );
-}
+}))
+export default Clients
