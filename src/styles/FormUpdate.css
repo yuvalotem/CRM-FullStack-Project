@@ -1,9 +1,10 @@
 #updateForm{
     width: 40vw;
     padding: 5px;
+    color: white;
     border-radius: 10px;
     border: #b2bec3 solid 1px;
-    background-color: #ffffffe8;
+    background-color: #1d1a1ae5;
     position: fixed;
     left: 30%;
     top: 30%;

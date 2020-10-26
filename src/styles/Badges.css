@@ -1,0 +1,28 @@
+.Badges{
+    margin-left: 5vw;
+    margin-top: 3vh;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr 6fr);
+    justify-items: left;
+}
+
+.Badges > .fas, .far{
+    display: grid;
+    justify-items: center;
+    padding: 0.8vw;
+    border-radius: 50%;
+    color: white;
+    font-size: 3.3vw;
+}
+.fa-chart-line{
+    background-color: #2ecc71;
+}
+.fa-envelope{
+    background-color: #3498db;
+}
+.fa-user-circle{
+    background-color: #e74c3c;
+}
+.fa-globe-africa{
+    background-color:#f1c40f;
+}

@@ -1,10 +1,4 @@
-#updateClient{
-    width: 35vw;
-    position: absolute;
-    left: 10vw;
-}
-#addClient{
-    width: 35vw;
-    position: absolute;
-    right: 10vw;
+.alertMessage{
+    display: inline-block;
+    top: 70vh;
 }

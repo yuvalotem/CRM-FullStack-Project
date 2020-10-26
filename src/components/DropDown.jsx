@@ -19,7 +19,7 @@ const DropDown = inject('clientStore')(observer((props) => {
     }
 
     return (
-        <DropdownButton id="dropdown-basic-button" title={`${numResults} Results`}>
+        <DropdownButton variant="info" id="dropdown-basic-button" title={`${numResults} Results`}>
             <Dropdown.Item onClick={handleClick}>50 Results</Dropdown.Item>
             <Dropdown.Item onClick={handleClick}>100 Results</Dropdown.Item>
             <Dropdown.Item onClick={handleClick}>200 Results</Dropdown.Item>

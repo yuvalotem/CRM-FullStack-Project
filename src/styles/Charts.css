@@ -1,0 +1,26 @@
+.Charts{
+    margin-top: 5vh;
+    display: grid;
+    grid-template-areas: 'e c c c''s s s a';
+    justify-items: center;
+    grid-gap: 3vw;
+}
+.ClientAcquisition{
+    grid-area: a;
+}
+.SalesSinceChart{
+    grid-area: s;
+}
+.TopEmployeesChart{
+    grid-area: e;
+}
+.SalesByCountry{
+    grid-area: c;
+}
+select{
+    border: none;
+    border-bottom: 1px solid #bdc3c7;
+}
+.chartTitle{
+   margin-right:60%;
+}

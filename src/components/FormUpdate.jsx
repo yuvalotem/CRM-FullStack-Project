@@ -3,8 +3,8 @@ import '../styles/FormUpdate.css';
 import { inject, observer } from 'mobx-react'
 import { Button, Form } from 'react-bootstrap';
 
-const FormUpdate = inject('cutomers', 'clientStore')(observer((props) => {
-    const { cutomers, clientStore } = props
+const FormUpdate = inject('customerStore', 'clientStore')(observer((props) => {
+    const { customerStore, clientStore } = props
     const { key, changeKey, value, changeValue, idToUpdate, changeIdToUpdate, changeShowForm } = clientStore
 
     const removeForm = () => {
@@ -16,7 +16,7 @@ const FormUpdate = inject('cutomers', 'clientStore')(observer((props) => {
 
     const updateCustomer = () => {
         if (key && value && idToUpdate) {
-            cutomers.updateCustomer(idToUpdate, key, value)
+            customerStore.updateCustomer(idToUpdate, key, value)
             changeKey(0)
             changeValue(0)
             changeIdToUpdate(0);
@@ -44,7 +44,7 @@ const FormUpdate = inject('cutomers', 'clientStore')(observer((props) => {
                 <Form.Label>Enter new value</Form.Label>
                 <Form.Control placeholder="value" value={value} onChange={changeValue} />
             </Form.Group>
-            <Button variant="primary" onClick={updateCustomer}>
+            <Button variant="outline-info" onClick={updateCustomer}>
                 Update
     </Button>
         </Form>

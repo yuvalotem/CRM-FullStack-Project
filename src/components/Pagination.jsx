@@ -2,16 +2,17 @@ import React from 'react';
 import { Pagination } from 'react-bootstrap';
 import { inject, observer } from 'mobx-react'
 
-const Clients = inject('cutomers', 'clientStore')(observer((props) => {
-    const { cutomers, clientStore } = props
+const Clients = inject('clientStore')(observer((props) => {
+    const { clientStore } = props
     const { numResults,
         active,
         changeStartResults,
         changeEndResults,
-        changeActive } = clientStore
+        changeActive,
+        filterData } = clientStore
     const items = []
 
-    for (let number = 1; number <= Math.ceil(cutomers.numCustomers / numResults); number++) {
+    for (let number = 1; number <= Math.ceil(filterData.length / numResults); number++) {
         items.push(
             <Pagination.Item onClick={() => {
                 changeStartResults(number * numResults - numResults)
@@ -25,7 +26,7 @@ const Clients = inject('cutomers', 'clientStore')(observer((props) => {
 
 
     return (
-            <Pagination size="sm">{items}</Pagination>
+        <Pagination size="sm">{items}</Pagination>
     );
 }))
 export default Clients

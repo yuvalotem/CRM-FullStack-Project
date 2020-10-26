@@ -4,15 +4,17 @@ import './styles/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Customers from './stores/Customer'
+import Customers from './stores/CustomerStore'
 import ClientStore from './stores/ClientStore'
 import ActionsStore from './stores/ActionsStore'
+import AnalyticsStore from './stores/AnalyticsStore'
 import { Provider } from 'mobx-react';
 
-const cutomers = new Customers()
+const customerStore = new Customers()
 const clientStore = new ClientStore()
 const actionsStore = new ActionsStore()
-const stores = {cutomers, clientStore, actionsStore}
+const analyticsStore = new AnalyticsStore()
+const stores = {customerStore, clientStore, actionsStore, analyticsStore}
 
 ReactDOM.render(
   // <React.StrictMode>

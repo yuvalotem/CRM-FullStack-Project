@@ -1,6 +1,7 @@
 import { makeObservable, action, observable } from 'mobx'
 
 class ClientStore {
+    filterData = []
     numResults = 50
     startResults = 0
     endResults = this.numResults
@@ -9,8 +10,11 @@ class ClientStore {
     idToUpdate = 0
     key = ''
     value = ''
+    searchKey = 'name'
+    searchValue = ''
     constructor() {
         makeObservable(this, {
+            filterData: observable,
             numResults: observable,
             startResults: observable,
             endResults: observable,
@@ -19,6 +23,8 @@ class ClientStore {
             idToUpdate: observable,
             key: observable,
             value: observable,
+            searchKey: observable,
+            searchValue: observable,
             changeNumResults: action,
             changeStartResults: action,
             changeEndResults: action,
@@ -26,7 +32,9 @@ class ClientStore {
             changeShowForm: action,
             changeIdToUpdate: action,
             changeValue: action,
-            changeKey: action
+            changeKey: action,
+            changeSearchValue: action,
+            changeSearchKey: action
         })
     }
     changeNumResults = (num) =>{
@@ -56,6 +64,18 @@ class ClientStore {
         e === 0 ?
         this.key = '':
         this.key = e.target.value
+    }
+    changeSearchValue = (val) =>{
+        this.searchValue = val
+    }
+    changeSearchKey = (key) =>{
+        this.searchKey = key
+    }
+    // filterResults = (key, value) =>{
+    //     this.filterData = this.filterData.filter(c => c[key].includes(value))
+    // }
+    enterData = (data) =>{
+        this.filterData = [...data]
     }
 }
 export default ClientStore

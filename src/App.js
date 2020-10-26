@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import { observer } from 'mobx-react'
 import Actions from './components/Actions';
 import NotFound from './components/NotFound';
+import Analytics from './components/Analytics';
 
 const App = (observer((props) => {
   return (
@@ -15,7 +16,7 @@ const App = (observer((props) => {
         <Route exact path="/" component={Clients} />
         <Route exact path="/Clients" component={Clients} />
         <Route exact path="/Actions" component={Actions} />
-        {/* <Route exact path="/Analytics" component={Analytics} /> */}
+        <Route exact path="/Analytics" component={Analytics} />
         <Route component={NotFound} />
       </Switch>
 

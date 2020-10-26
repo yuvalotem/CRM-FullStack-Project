@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FormControl, Nav, Navbar, Button } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 
@@ -12,10 +12,10 @@ export default function NavBar() {
         <LinkContainer to="/Actions"><Nav.Link>Actions</Nav.Link></LinkContainer>
         <LinkContainer to="/Analytics"><Nav.Link>Analytics</Nav.Link></LinkContainer>
       </Nav>
-      <Form inline>
+      {/* <Form inline>
         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
         <Button variant="outline-info">Search</Button>
-      </Form>
+      </Form> */}
     </Navbar>
   );
 }

@@ -5,9 +5,10 @@ import { inject, observer } from 'mobx-react'
 import FormUpdate from './FormUpdate';
 import DropDown from './DropDown';
 import Pagination from './Pagination';
+import SearchBar from './SearchBar';
 
-const Clients = inject('cutomers', 'clientStore')(observer((props) => {
-    const { cutomers, clientStore } = props
+const Clients = inject('customerStore', 'clientStore')(observer((props) => {
+    const { customerStore, clientStore } = props
     const {
         startResults,
         endResults,
@@ -15,14 +16,29 @@ const Clients = inject('cutomers', 'clientStore')(observer((props) => {
         changeShowForm,
         changeIdToUpdate,
         changeKey,
-        changeValue } = clientStore
+        changeValue,
+        searchKey,
+        searchValue,
+        filterData,
+        enterData} = clientStore
 
     useEffect(() => {
         const fetchCustomersFromDB = async () => {
-            await cutomers.loadCustomerFromDB()
+            await customerStore.loadCustomerFromDB()
+            enterData(customerStore.data)
         }
         fetchCustomersFromDB()
     }, [])
+
+    useEffect(() => {
+        if (searchValue) {
+            enterData(customerStore.data.filter(c => typeof c[searchKey] === 'string' ?
+                c[searchKey].includes(searchValue) :
+                c[searchKey] === (searchValue)))
+        } else {
+            enterData(customerStore.data)
+        }
+    }, [searchKey, searchValue])
 
 
     const addUpdateForm = (id) => {
@@ -34,8 +50,10 @@ const Clients = inject('cutomers', 'clientStore')(observer((props) => {
 
     return (
         <div className="Clients">
-            <DropDown />
-
+            <div id='topBar'>
+                <DropDown />
+                <SearchBar />
+            </div>
             <ListGroup>
                 <ListGroup.Item className='costumer' variant="dark">
                     <span>Name</span>
@@ -46,15 +64,15 @@ const Clients = inject('cutomers', 'clientStore')(observer((props) => {
                     <span>Email Type</span>
                     <span>Owner</span>
                 </ListGroup.Item>
-                {cutomers.customers.map((c, i) => startResults <= i && i <= endResults ?
+                {filterData.map((c, i) => startResults <= i && i <= endResults ?
                     <Fragment key={c._id}>
                         <ListGroup.Item className='costumer' onClick={() => addUpdateForm(c._id)}>
                             <span>{c.name.split(' ')[0]} </span>
-                            <span>{c.name.split(' ')[1]}</span>
+                            <span>{c.name.split(' ')[1]} {c.name.split(' ')[2]}</span>
                             <span>{c.country}</span>
                             <span>{c.firstContact}</span>
                             <span>{c.sold ? <i className="fas fa-check"></i> : <i className="fas fa-times"></i>}</span>
-                            <span>{c.emailType === 'null' ? '' : c.emailType}</span>
+                            <span>{c.emailType}</span>
                             <span>{c.owner}</span>
                         </ListGroup.Item>
                     </Fragment> :

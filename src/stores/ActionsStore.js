@@ -1,27 +1,25 @@
 import { makeObservable, action, observable } from 'mobx'
 
 class ActionsStore {
-    firstName = ''
-    lastName = ''
-    country = ''
-    email = ''
-    owner = ''
-    emailType = ''
-    name = ''
+    showAlert = false
+    alertContent = ''
+    alertType = ''
     constructor() {
         makeObservable(this, {
-            firstName: observable,
-            lastName: observable,
-            country: observable,
-            email: observable,
-            owner: observable,
-            emailType: observable,
-            name: observable,
-            handleChange: action
+            showAlert: observable,
+            alertContent: observable,
+            alertType: observable,
+            displayAlert: action,
+            removeAlert: action
         })
     }
-    handleChange = (name, value) =>{
-        this[name] = value
+    displayAlert = (type, text) =>{
+        this.alertType = type
+        this.alertContent = text
+        this.showAlert = true
+    }
+    removeAlert = () =>{
+        this.showAlert = false
     }
 }
 export default ActionsStore
