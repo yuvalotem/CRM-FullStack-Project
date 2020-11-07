@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Charts.css';
+import '../../styles/Charts.css';
 import { observer } from 'mobx-react'
 import TopEmployeesChart from './TopEmployeesChart'
 import SalesByCountry from './SalesByCountry'

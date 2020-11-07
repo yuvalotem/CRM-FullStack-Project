@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/DropDown.css';
+import '../../styles/DropDown.css';
 import { Dropdown, DropdownButton} from 'react-bootstrap';
 import { inject, observer } from 'mobx-react'
 

@@ -9,16 +9,26 @@ const Clients = inject('clientStore')(observer((props) => {
         changeStartResults,
         changeEndResults,
         changeActive,
-        filterData } = clientStore
+        filterData,
+        showForm,
+        changeShowForm } = clientStore
     const items = []
+
+    const openForm = (number) => {
+        changeStartResults(number * numResults - numResults)
+        changeEndResults(number * numResults)
+        changeActive(number)
+        if (showForm) {
+            changeShowForm()
+        }
+    }
 
     for (let number = 1; number <= Math.ceil(filterData.length / numResults); number++) {
         items.push(
-            <Pagination.Item onClick={() => {
-                changeStartResults(number * numResults - numResults)
-                changeEndResults(number * numResults)
-                changeActive(number)
-            }} key={number} active={number === active}>
+            <Pagination.Item
+                onClick={() => openForm(number)}
+                key={number}
+                active={number === active}>
                 {number}
             </Pagination.Item>,
         );

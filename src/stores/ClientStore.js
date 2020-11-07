@@ -71,9 +71,6 @@ class ClientStore {
     changeSearchKey = (key) =>{
         this.searchKey = key
     }
-    // filterResults = (key, value) =>{
-    //     this.filterData = this.filterData.filter(c => c[key].includes(value))
-    // }
     enterData = (data) =>{
         this.filterData = [...data]
     }

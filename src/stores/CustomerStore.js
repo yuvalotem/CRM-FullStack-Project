@@ -43,7 +43,7 @@ class Customer {
             value = this.properString(value)
         }
         const values = {id, key, value}
-        await Axios.put('http://localhost:4000/customer', values)
+        await Axios.put('/customer', values)
         this.data = this.data.map(c => {
             if (c._id !== id) {
                 return c
@@ -57,7 +57,7 @@ class Customer {
         firstName = this.properCase(firstName)
         lastName = this.properCase(lastName)
         const customer = {firstName, lastName, email, country, owner}
-        let response = await Axios.post('http://localhost:4000/customer', customer)
+        let response = await Axios.post('/customer', customer)
         response = response.data[0]
         customer._id = response
         this.data.push(customer)

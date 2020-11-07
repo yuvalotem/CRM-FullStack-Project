@@ -13,11 +13,11 @@ class AnalyticsStore {
         })
     }
     getStats = async () =>{
-        const response = await Axios.get('http://localhost:4000/analytics')
+        const response = await Axios.get('/analytics')
         this.badgesData = response.data
     }
-    getCharts = async (param) =>{
-        const response = await Axios.put('http://localhost:4000/charts', param)
+    getCharts = async (param = 'country') =>{
+        const response = await Axios.get('/charts/'+ param)
         this.chartsData = response.data
     }
 }

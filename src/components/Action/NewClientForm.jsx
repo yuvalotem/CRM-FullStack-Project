@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { inject, observer } from 'mobx-react'
 import { Button, Form, Col } from 'react-bootstrap';
-import '../styles/NewClientForm.css'
+import '../../styles/NewClientForm.css'
 
 
 const NewClientForm = inject('customerStore', 'actionsStore')(observer((props) => {

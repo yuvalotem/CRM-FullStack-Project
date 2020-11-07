@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/FormUpdate.css';
+import '../../styles/FormUpdate.css';
 import { inject, observer } from 'mobx-react'
 import { Button, Form } from 'react-bootstrap';
 
@@ -32,6 +32,7 @@ const FormUpdate = inject('customerStore', 'clientStore')(observer((props) => {
             <Form.Group controlId="formBasicEmail">
                 <Form.Label>Select Field</Form.Label>
                 <Form.Control as="select" value={key} onChange={changeKey}>
+                    <option>Field Name</option>
                     <option value='name'>Name</option>
                     <option value='country'>Country</option>
                     <option value='firstContact'>First Contact</option>

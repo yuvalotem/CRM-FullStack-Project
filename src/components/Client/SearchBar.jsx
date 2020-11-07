@@ -1,22 +1,29 @@
 import React, { useState } from 'react';
 import { Dropdown, FormControl, InputGroup, DropdownButton } from 'react-bootstrap';
-import '../styles/searchBar.css';
+import '../../styles/searchBar.css';
 import { inject, observer } from 'mobx-react'
 
 const SearchBar = inject('clientStore')(observer((props) => {
-    const { clientStore} = props
-    const {searchKey, searchValue , changeSearchValue , changeSearchKey} = clientStore
+    const { clientStore } = props
+    const { searchKey,
+        searchValue,
+        changeSearchValue,
+        changeSearchKey,
+        showForm,
+        changeShowForm } = clientStore
     const [titleValue, setTitleValue] = useState('Name')
 
 
-    const handleClick = e =>{
+    const handleClick = e => {
         changeSearchKey(e.target.getAttribute('value'));
-        console.log(e.target.getAttribute('value'));
         setTitleValue(e.target.text)
     }
 
-    const handleType = e =>{
+    const handleType = e => {
         changeSearchValue(e.target.value)
+        if(showForm){
+            changeShowForm()
+        }
     }
 
     const checkObj = {}
@@ -38,7 +45,7 @@ const SearchBar = inject('clientStore')(observer((props) => {
                 list='data'
             />
             <datalist id="data">
-                {clientStore.filterData.map((item, key) =>addDataList(item, key))}
+                {clientStore.filterData.map((item, key) => addDataList(item, key))}
             </datalist>
 
             <DropdownButton

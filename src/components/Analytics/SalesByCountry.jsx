@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/Badges.css';
+import '../../styles/Badges.css';
 import { inject, observer } from 'mobx-react'
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
@@ -17,8 +17,7 @@ const SalesByCountry = inject('analyticsStore')(observer((props) => {
 
     const handleChange = async (e) => {
         setParam(e.target.value)
-        await analyticsStore.getCharts({ param: e.target.value })
-        console.log(analyticsStore.chartsData.salesByCountry);
+        await analyticsStore.getCharts(e.target.value)
         if (analyticsStore.chartsData.salesByCountry[0]['MONTH(firstContact)']) {
             const newData = analyticsStore.chartsData.salesByCountry.map(c => {
                 c['MONTH(firstContact)'] = moment().month(c['MONTH(firstContact)']-1).format("MMM")

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react'
 import { Alert } from 'react-bootstrap';
-import '../styles/Action.css'
+import '../../styles/Action.css'
 import UpdateClientForm from './UpdateClientForm'
 import NewClientForm from './NewClientForm'
 

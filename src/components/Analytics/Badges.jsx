@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/Badges.css';
+import '../../styles/Badges.css';
 import { observer } from 'mobx-react'
 import NewClientsBadge from './NewClientsBadge';
 import EmailsSentBadge from './EmailsSentBadge';

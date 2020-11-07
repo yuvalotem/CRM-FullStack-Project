@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { inject, observer } from 'mobx-react'
 import { Button, Form, Col } from 'react-bootstrap';
-import '../styles/UpdateClientForm.css'
+import '../../styles/UpdateClientForm.css'
 
 
 const UpdateClientForm = inject('customerStore', 'actionsStore')(observer((props) => {
@@ -11,67 +11,41 @@ const UpdateClientForm = inject('customerStore', 'actionsStore')(observer((props
     const [emailType, setEmailType] = useState('')
     const [owner, setOwner] = useState('')
 
-    const declareSale = async () =>{
-        if (!name) {
-            displayAlert('danger', 'No missing fields allowed')
-            return
-        }
-        const found = await customerStore.updateCustomer(0, 'sold', '1', name)
-        if (!found) {
-            displayAlert('danger', 'Name not found')
-        } else {
-            displayAlert('success', `We declare ${name} sale`)
-            setName('')
-        }
-    }
 
     const genrateOwners = () => {
         const ownersArray = []
-        customerStore.data.forEach(c =>{
-            if(!ownersArray.some(o=> o === c.owner) && c.owner !== null){
+        customerStore.data.forEach(c => {
+            if (!ownersArray.some(o => o === c.owner) && c.owner !== null) {
                 ownersArray.push(c.owner)
             }
         })
         return ownersArray.map(o => <option key={o} value={o}>{o}</option>)
     }
 
-    const changeOwner = async () => {
-        if (!owner || !name) {
+    const changeField = async (param, value, text) => {
+        if (!value || !name) {
             displayAlert('danger', 'No missing fields allowed')
             return
         }
-        const found = await customerStore.updateCustomer(0, 'owner', owner, name)
+        const found = await customerStore.updateCustomer(0, param, value, name)
         if (!found) {
             displayAlert('danger', 'Name not found')
         } else {
-            displayAlert('success', `${name} owner updated to ${owner}`)
+            displayAlert('success', text)
             setName('')
             setOwner('')
-        }
-    }
-
-    const changeMail = async () => {
-        if (!emailType || !name) {
-            displayAlert('danger', 'No missing fields allowed')
-            return
-        }
-        const found = await customerStore.updateCustomer(0, 'emailType', emailType, name)
-        if (!found) {
-            displayAlert('danger', 'Name not found')
-        } else {
-            displayAlert('success', `${name} email type updated to ${emailType}`)
-            setName('')
             setEmailType('')
         }
     }
+
     return (
         <Form id='updateClient'>
-            <h3>Update Client</h3><br/>
+            <h3>Update Client</h3><br />
             <Form.Group controlId="formGroupName">
                 <Form.Control
                     name='name'
                     value={name}
-                    onChange={(e)=> setName(e.target.value)}
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="Client Name"
                     list="data" />
             </Form.Group>
@@ -82,12 +56,12 @@ const UpdateClientForm = inject('customerStore', 'actionsStore')(observer((props
             </datalist>
             <Form.Row>
                 <Col>
-                    <Button variant="secondary" onClick={changeOwner}>
+                    <Button variant="secondary" onClick={() => changeField('owner', owner, `${name} owner updated to ${owner}`)}>
                         Transfer Ownership
                     </Button>
                 </Col>
                 <Col>
-                    <Form.Control as="select" name='owner' value={owner} onChange={(e)=> setOwner(e.target.value)}>
+                    <Form.Control as="select" name='owner' value={owner} onChange={(e) => setOwner(e.target.value)}>
                         <option>Owner</option>
                         {genrateOwners()}
                     </Form.Control>
@@ -95,12 +69,12 @@ const UpdateClientForm = inject('customerStore', 'actionsStore')(observer((props
             </Form.Row><br />
             <Form.Row>
                 <Col>
-                    <Button variant="secondary" onClick={changeMail}>
+                    <Button variant="secondary" onClick={() => changeField('emailType', emailType, `${name} email type updated to ${emailType}`)}>
                         Update Email Type
                     </Button>
                 </Col>
                 <Col>
-                    <Form.Control as="select" name='emailType' value={emailType} onChange={(e)=> setEmailType(e.target.value)}>
+                    <Form.Control as="select" name='emailType' value={emailType} onChange={(e) => setEmailType(e.target.value)}>
                         <option>Email Type</option>
                         <option value='A'>A</option>
                         <option value='B'>B</option>
@@ -110,11 +84,11 @@ const UpdateClientForm = inject('customerStore', 'actionsStore')(observer((props
                 </Col>
             </Form.Row><br />
             <Form.Row>
-            <Col>
-                Declare Sale
+                <Col>
+                    Declare Sale
                 </Col>
                 <Col>
-                    <Button variant="secondary" onClick={declareSale}>
+                    <Button variant="secondary" onClick={() => changeField('sold', '1', `We declare ${name} sale`)}>
                         Sold!
                         </Button>
                 </Col>

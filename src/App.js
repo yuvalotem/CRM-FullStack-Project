@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './styles/App.css';
-import Clients from './components/Clients';
+import Clients from './components/Client/Clients';
 import NavBar from './components/NavBar';
 import { observer } from 'mobx-react'
-import Actions from './components/Actions';
+import Actions from './components/Action/Actions';
 import NotFound from './components/NotFound';
-import Analytics from './components/Analytics';
+import Analytics from './components/Analytics/Analytics';
 
 const App = (observer((props) => {
   return (

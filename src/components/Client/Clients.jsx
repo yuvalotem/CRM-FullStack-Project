@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { ListGroup } from 'react-bootstrap';
-import '../styles/Clients.css';
+import '../../styles/Clients.css';
 import { inject, observer } from 'mobx-react'
 import FormUpdate from './FormUpdate';
 import DropDown from './DropDown';
@@ -65,8 +65,10 @@ const Clients = inject('customerStore', 'clientStore')(observer((props) => {
                     <span>Owner</span>
                 </ListGroup.Item>
                 {filterData.map((c, i) => startResults <= i && i <= endResults ?
-                    <Fragment key={c._id}>
-                        <ListGroup.Item className='costumer' onClick={() => addUpdateForm(c._id)}>
+                        <ListGroup.Item
+                        className='costumer'
+                        key={c._id}
+                        onClick={() => addUpdateForm(c._id)}>
                             <span>{c.name.split(' ')[0]} </span>
                             <span>{c.name.split(' ')[1]} {c.name.split(' ')[2]}</span>
                             <span>{c.country}</span>
@@ -74,8 +76,7 @@ const Clients = inject('customerStore', 'clientStore')(observer((props) => {
                             <span>{c.sold ? <i className="fas fa-check"></i> : <i className="fas fa-times"></i>}</span>
                             <span>{c.emailType}</span>
                             <span>{c.owner}</span>
-                        </ListGroup.Item>
-                    </Fragment> :
+                        </ListGroup.Item> :
                     null)}
             </ListGroup>
                     {showForm ? <FormUpdate /> : null}

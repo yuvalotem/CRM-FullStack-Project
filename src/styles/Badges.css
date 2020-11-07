@@ -9,10 +9,10 @@
 .Badges > .fas, .far{
     display: grid;
     justify-items: center;
-    padding: 0.8vw;
+    padding: 15px;
     border-radius: 50%;
     color: white;
-    font-size: 3.3vw;
+    font-size: 35px;
 }
 .fa-chart-line{
     background-color: #2ecc71;
