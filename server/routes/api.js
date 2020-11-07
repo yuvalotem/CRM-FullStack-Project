@@ -22,8 +22,6 @@ sequelize
         console.error('Unable to connect to the database:', err);
     })
 
-console.log('start the routes');
-
 route.get('/customers', async function (req, res){
     const customers = await sequelize.query(`SELECT * FROM customer`)
     res.send(customers)
@@ -122,9 +120,5 @@ route.get('/charts/:key', async function (req, res){
 
     res.send({ employeesOfTheMonth, salesByCountry, salesSince, clientAcquisition })
 })
-
-route.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
 
 module.exports = route
