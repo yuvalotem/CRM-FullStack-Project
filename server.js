@@ -16,6 +16,6 @@ app.get('*', function (req, res) {
 });
 
 const port = 4000
-app.listen(port, function(req, res){
+app.listen(process.env.PORT || port, function(req, res){
     console.log('running on ' + port);
 })
