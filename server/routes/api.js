@@ -4,7 +4,7 @@ const moment = require('moment')
 
 const route = express()
 
-const sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL)
+const sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL || 'mysql://root:@localhost/sql_crm')
 route.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
