@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/', api)
-console.log('passed the routes');
+
 const port = 4000
 app.listen(process.env.PORT || port, function(req, res){
     console.log('running on ' + port);
