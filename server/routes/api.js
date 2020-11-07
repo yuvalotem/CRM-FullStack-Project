@@ -121,4 +121,8 @@ route.get('/charts/:key', async function (req, res){
     res.send({ employeesOfTheMonth, salesByCountry, salesSince, clientAcquisition })
 })
 
+route.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 module.exports = route
