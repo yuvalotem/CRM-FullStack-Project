@@ -28,7 +28,7 @@ class Customer {
         return properValue.slice(0, properValue.length-1)
     }
     loadCustomerFromDB = async () => {
-        const response = await Axios.get('http://localhost:4000/customers')
+        const response = await Axios.get('/customers')
         this.data = response.data[0]
     }
     updateCustomer = async (id, key, value, name) => {
