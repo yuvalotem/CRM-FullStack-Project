@@ -13,11 +13,11 @@ class AnalyticsStore {
         })
     }
     getStats = async () =>{
-        const response = await Axios.get('/analytics')
+        const response = await Axios.get('https://git.heroku.com/crm-react-yuval.git/analytics')
         this.badgesData = response.data
     }
     getCharts = async (param = 'country') =>{
-        const response = await Axios.get('/charts/'+ param)
+        const response = await Axios.get('https://git.heroku.com/crm-react-yuval.git/charts/'+ param)
         this.chartsData = response.data
     }
 }
