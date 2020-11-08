@@ -28,7 +28,7 @@ class Customer {
         return properValue.slice(0, properValue.length-1)
     }
     loadCustomerFromDB = async () => {
-        const response = await Axios.get('https://git.heroku.com/crm-react-yuval.git/customers')
+        const response = await Axios.get('/customers')
         this.data = response.data[0]
     }
     updateCustomer = async (id, key, value, name) => {
@@ -43,7 +43,7 @@ class Customer {
             value = this.properString(value)
         }
         const values = {id, key, value}
-        await Axios.put('https://git.heroku.com/crm-react-yuval.git/customer', values)
+        await Axios.put('/customer', values)
         this.data = this.data.map(c => {
             if (c._id !== id) {
                 return c
@@ -57,7 +57,7 @@ class Customer {
         firstName = this.properCase(firstName)
         lastName = this.properCase(lastName)
         const customer = {firstName, lastName, email, country, owner}
-        let response = await Axios.post('https://git.heroku.com/crm-react-yuval.git/customer', customer)
+        let response = await Axios.post('/customer', customer)
         response = response.data[0]
         customer._id = response
         this.data.push(customer)
